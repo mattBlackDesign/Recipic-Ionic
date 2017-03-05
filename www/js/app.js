@@ -102,24 +102,28 @@ angular.module('ionicApp', [
 })
 
 .controller("ExampleController", function ($scope, $cordovaCamera, $ionicPopup, $timeout, $http) {
+
  
-                $scope.takePhoto = function () {
-                  var options = {
-                    quality: 75,
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    allowEdit: true,
-                    encodingType: Camera.EncodingType.JPEG,
-                    targetWidth: 300,
-                    targetHeight: 300,
-                    popoverOptions: CameraPopoverOptions,
-                    saveToPhotoAlbum: false
-                };
+                      $scope.takePhoto = function () {
+                          var options = {
+                            quality: 75,
+                            destinationType: Camera.DestinationType.DATA_URL,
+                            sourceType: Camera.PictureSourceType.CAMERA,
+                            allowEdit: true,
+                            encodingType: Camera.EncodingType.JPEG,
+                            targetWidth: 300,
+                            targetHeight: 300,
+                            popoverOptions: CameraPopoverOptions,
+                            saveToPhotoAlbum: false
+                        };
+
+
+
                      $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                         var DataToSend = {
-                            image: "data:image/jpeg;base64," + imageData
 
+                         var DataToSend = {
+                            image: imageData
                          };
 
 
@@ -128,9 +132,9 @@ angular.module('ionicApp', [
 
                           // An elaborate, custom popup
                           var myPopup = $ionicPopup.show({
-                            template: '<input type="password" ng-model="data.wifi">',
-                            title: 'Enter Wi-Fi Password',
-                            subTitle: 'Please use normal things' + DataToSend.image,
+                            template: '<input type="text" ng-model="data.wifi">',
+                            title: 'Apple recognized',
+                            subTitle: 'Is this correct? Otherwise enter name of food. ',
                             scope: $scope,
                             buttons: [
                               { text: 'Cancel' },
