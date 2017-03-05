@@ -101,7 +101,7 @@ angular.module('ionicApp', [
     $urlRouterProvider.otherwise("/tab/home");
 })
 
-.controller("ExampleController", function ($scope, $cordovaCamera) {
+.controller("ExampleController", function ($scope, $cordovaCamera, $ionicPopup, $timeout, $http) {
  
                 $scope.takePhoto = function () {
                   var options = {
@@ -122,16 +122,52 @@ angular.module('ionicApp', [
 
                          };
 
-                         $http.post('http://recipic.net/api/v1/images/photo_identify.json?auth_token=VAPUzkyLUkdYfLZ52t89', DataToSend).then(function (res){
-                            $scope.response = res.data;
-                        });
 
-                        // $http({
-                        //     method: 'POST',
-                        //     url: 'http://recipic.net/api/v1/images/photo_identify.json?auth_token=VAPUzkyLUkdYfLZ52t89',
-                        //     headers: {'Content-Type': 'application/json'},
-                        //     data: DataToSend
-                        // })
+                         $scope.showPopup = function() {
+                          $scope.data = {};
+
+                          // An elaborate, custom popup
+                          var myPopup = $ionicPopup.show({
+                            template: '<input type="password" ng-model="data.wifi">',
+                            title: 'Enter Wi-Fi Password',
+                            subTitle: 'Please use normal things' + DataToSend.image,
+                            scope: $scope,
+                            buttons: [
+                              { text: 'Cancel' },
+                              {
+                                text: '<b>Save</b>',
+                                type: 'button-positive',
+                                onTap: function(e) {
+                                  if (!$scope.data.wifi) {
+                                    //don't allow the user to close unless he enters wifi password
+                                    e.preventDefault();
+                                  } else {
+                                    return $scope.data.wifi;
+                                  }
+                                }
+                              }
+                            ]
+                          });
+
+                          myPopup.then(function(res) {
+                            console.log('Tapped!', res);
+                          });
+
+                          $timeout(function() {
+                             myPopup.close(); //close the popup after 3 seconds for some reason
+                          }, 100000);
+                         };
+
+                         $scope.showPopup();
+
+
+
+                        $http({
+                            method: 'POST',
+                            url: 'http://recipic.net/api/v1/images/photo_identify.json?auth_token=VAPUzkyLUkdYfLZ52t89',
+                            headers: {'Content-Type': 'application/json'},
+                            data: DataToSend
+                        })
 
                     }, function (err) {
                         // An error occured. Show a message to the user
