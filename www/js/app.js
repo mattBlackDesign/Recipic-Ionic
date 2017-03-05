@@ -118,6 +118,17 @@ angular.module('ionicApp', [
    
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                         var DataToSend = {
+                    image: "data:image/jpeg;base64," + imageData
+
+   };
+
+   $http({
+            method: 'POST',
+            url: 'http://recipic.net/api/v1/photo_identify.json?auth_token=VAPUzkyLUkdYfLZ52t89',
+            headers: {'Content-Type': 'application/json'},
+            data: DataToSend
+        })
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
