@@ -115,8 +115,7 @@ angular.module('ionicApp', [
                     popoverOptions: CameraPopoverOptions,
                     saveToPhotoAlbum: false
                 };
-   
-                    $cordovaCamera.getPicture(options).then(function (imageData) {
+                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
                          var DataToSend = {
                     image: "data:image/jpeg;base64," + imageData
@@ -125,7 +124,7 @@ angular.module('ionicApp', [
 
    $http({
             method: 'POST',
-            url: 'http://recipic.net/api/v1/photo_identify.json?auth_token=VAPUzkyLUkdYfLZ52t89',
+            url: 'http://recipic.net/api/v1/images/photo_identify.json?auth_token=VAPUzkyLUkdYfLZ52t89',
             headers: {'Content-Type': 'application/json'},
             data: DataToSend
         })
