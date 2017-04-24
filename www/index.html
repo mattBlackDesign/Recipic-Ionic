@@ -114,12 +114,12 @@
 	<script id="templates/tabs.html" type="text/ng-template">
 		<ion-tabs class="tabs-icon-top tabs-stable">
 
-			<ion-tab title="Home" icon="ion-android-home" href="#/tab/home">
-				<ion-nav-view name="home-tab"></ion-nav-view>
-			</ion-tab>
-
 			<ion-tab title="Picture" icon="ion-camera" ng-click="goMyList()">
 				<ion-nav-view name="person-tab"></ion-nav-view>
+			</ion-tab>
+
+			<ion-tab title="Home" icon="ion-android-home" href="#/tab/home">
+				<ion-nav-view name="home-tab"></ion-nav-view>
 			</ion-tab>
 
 			<ion-tab title="Favorites" icon="ion-android-clipboard" ng-click="goFavorite()">
