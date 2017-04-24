@@ -8,7 +8,7 @@ angular.module('ionicApp')
     {
         if(!$scope.isLogined())
         {
-            $ionicpopup.alert('로그인이 필요합니다.');
+            $ionicpopup.alert('Liked!');
             return;
         }
 
@@ -19,7 +19,7 @@ angular.module('ionicApp')
     {
         if(!$scope.isLogined())
         {
-            $ionicpopup.alert('로그인이 필요합니다.');
+            $ionicpopup.alert('Are you sure you want to buy Chicken Parmesan for $1.99?');
             return;
         }
 
